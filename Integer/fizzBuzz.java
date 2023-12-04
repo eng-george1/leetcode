@@ -35,7 +35,9 @@ public class fizzBuzz {
         System.out.println("Hello");
         System.out.println(fizzBuzz(3));
     }
-
+/*
+ * TC:O(n) SC: O(n)
+ */
     public static List<String> fizzBuzz(int n) {
         String[] ansStrings = new String[n];
         // the number is index 1 not zero
