@@ -1,0 +1,19 @@
+use TODO Highlight
+and in setting.json add 
+
+ "todohighlight.keywords": [
+        "REVIEW:",
+        {
+            "text": "#Review",
+            "color": "#ff0000",
+            "backgroundColor": "yellow",
+            "overviewRulerColor": "grey"
+        },
+        "Notes:",
+        {
+            "text": "#Notes",
+            "color": "#FF0000",
+            "backgroundColor": "rgba(0,0,0,.2)",
+            "overviewRulerColor": "grey"
+        }
+    ]
