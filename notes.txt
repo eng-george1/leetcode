@@ -1,3 +1,4 @@
+method00 --> Brute Force solution 
 use TODO Highlight
 and in setting.json add 
 

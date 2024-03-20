@@ -1,4 +1,4 @@
-//package ;
+package Integer;
 public class factorialTrailingZeroes {
     /*
      * https://leetcode.com/problems/factorial-trailing-zeroes/

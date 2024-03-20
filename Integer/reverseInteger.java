@@ -1,4 +1,4 @@
-//package ;
+package Integer;
 public class reverseInteger {
     /*
      * https://leetcode.com/problems/reverse-integer/description/
