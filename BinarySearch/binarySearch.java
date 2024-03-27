@@ -26,6 +26,7 @@ public class binarySearch {
     public static void main(String[] args) {
         System.out.println("Hello");
         System.out.println(search(new int[] { 1, 2, 3, 4, 5 }, 5));
+        System.out.println(search(new int[] { 1, 2, 3 }, 5));
     }
 
     /*
@@ -35,13 +36,14 @@ public class binarySearch {
      */
     public static int search(int[] nums, int target) {
         int startI = 0, endI = nums.length;
-        while (startI <= endI) {
-            if (nums[startI + (endI - startI) / 2] == target)
-                return startI + (endI - startI) / 2;
-            if (nums[startI + (endI - startI) / 2] > target) {
-                endI = startI + (endI - startI) / 2;
+        while (startI < endI) {
+            int mid = startI + (endI - startI) / 2;
+            if (nums[mid] == target)
+                return mid;
+            if (nums[mid] > target) {
+                endI = mid;
             } else {
-                startI = startI + (endI - startI) / 2 + 1;
+                startI = mid + 1;
             }
         }
         return -1;

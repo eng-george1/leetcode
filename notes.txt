@@ -17,4 +17,11 @@ and in setting.json add
             "backgroundColor": "rgba(0,0,0,.2)",
             "overviewRulerColor": "grey"
         }
+          "Idea:",
+        {
+            "text": "#Idea",
+            "color": "#ff659f",
+            "backgroundColor": "rgba(0,0,0,.2)",
+            "overviewRulerColor": "grey"
+        }
     ]
