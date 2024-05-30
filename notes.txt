@@ -20,8 +20,15 @@ and in setting.json add
           "Idea:",
         {
             "text": "#Idea",
-            "color": "#ff659f",
+            "color": "#0000ff",
             "backgroundColor": "rgba(0,0,0,.2)",
+            "overviewRulerColor": "grey"
+        }
+           "LastReview:",
+        {
+            "text": "#LastReview",
+            "color": "#ff659f",
+            "backgroundColor": "rgba(0,0,0)",
             "overviewRulerColor": "grey"
         }
     ]
