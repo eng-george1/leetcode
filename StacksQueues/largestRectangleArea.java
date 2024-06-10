@@ -33,6 +33,7 @@ public class largestRectangleArea {
         System.out.println(largestRectangleArea(new int[] { 2, 1, 5, 6, 2, 3 }));
         System.out.println(largestRectangleArea(new int[] { 2, 1, 5, 6, 0, 3, 3, 3, 3 }));
         System.out.println(largestRectangleArea(new int[] { 2, 1, 1 }));
+        System.out.println(largestRectangleArea(new int[] { 2, 4}));
     }
 
     /*
@@ -47,7 +48,8 @@ public class largestRectangleArea {
      * [2,1,2]
      * https://www.youtube.com/watch?v=zx5Sw9130L0&ab_channel=NeetCode
      */
-    public static int largestRectangleArea(int[] heights) {
+     // save the item and the index of its effect like [2,1,1] for the first 1 its index 0 not 1  
+     public static int largestRectangleArea(int[] heights) {
         Stack<int[]> st = new Stack<>();
         int ans = 0;
         // push first element
@@ -55,13 +57,12 @@ public class largestRectangleArea {
         for (int i = 1; i < heights.length; i++) {
             // start index for case like [2,1,2] so one can be from index 0
             int start = i;
-            // pop all items that is > current, push only the increase values
+            //pop all items that is > current, push only the increase values 
             while (!st.isEmpty() && st.peek()[1] > heights[i]) {
                 ans = Math.max(ans, st.peek()[1] * (i - st.peek()[0]));
                 start = st.pop()[0];
             }
-            // after clear our stack we are sure the value in the stack less or equal to the
-            // current
+            // after clear our stack we are sure the value in the stack less or equal to the current
             st.push(new int[] { start, heights[i] });
         }
         while (!st.isEmpty()) {
@@ -69,10 +70,36 @@ public class largestRectangleArea {
         }
         return ans;
     }
-
+    // we are using the index only in the stack but we use the width from the second element in the stack not the one in the top 
+    public static int largestRectangleArea1(int[] heights) {
+        Stack<Integer> st = new Stack<>();
+        int ans = 0;
+        // push first element
+        st.push( 0);
+        for (int i = 1; i < heights.length; i++) {
+            //pop all items that is > current, push only the increase values 
+            while (!st.isEmpty() &&heights[ st.peek()] > heights[i]) {
+                int height=heights[st.pop()];
+                // use the index of the item before the top in the stack
+                int width=st.isEmpty()?i:i-st.peek()-1;
+                ans = Math.max(ans,height* width);                
+            }
+            // after clear our stack we are sure the value in the stack less or equal to the current
+            st.push(i);
+        }
+        while (!st.isEmpty()) {
+            int height=heights[st.pop()];
+            // use the high len if not item in the stack
+            int width=st.isEmpty()?heights.length:heights.length-st.peek()-1;
+            ans = Math.max(ans,height* width);                
+        }
+        return ans;
+    }
+   
+   
     // brute force (or naive) solution O(n^2) SC: O(1)
     // Track the start, min item,max area
-    public static int largestRectangleArea1(int[] heights) {
+    public static int largestRectangleArea3(int[] heights) {
         int ans = 0, min = 0;
         for (int i = 0; i < heights.length; i++) {
             min = heights[i];
