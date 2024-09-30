@@ -2,7 +2,8 @@ method00 --> Brute Force solution
 use TODO Highlight
 and in setting.json add 
 
- "todohighlight.keywords": [
+{
+    "todohighlight.keywords": [
         "REVIEW:",
         {
             "text": "#Review",
@@ -16,19 +17,49 @@ and in setting.json add
             "color": "#FF0000",
             "backgroundColor": "rgba(0,0,0,.2)",
             "overviewRulerColor": "grey"
-        }
-          "Idea:",
+        },
+        "Idea:",
         {
             "text": "#Idea",
-            "color": "#0000ff",
+            "color": "#ff659f",
             "backgroundColor": "rgba(0,0,0,.2)",
             "overviewRulerColor": "grey"
-        }
-           "LastReview:",
+        },
+        "LastReview:",
         {
             "text": "#LastReview",
-            "color": "#ff659f",
+            "color": "#0000ff",
             "backgroundColor": "rgba(0,0,0)",
             "overviewRulerColor": "grey"
+        },
+        "PatchNo:",
+        {
+            "text": "#PatchNo",
+            "color": "#8cd927",
+            "backgroundColor": "white",
+            "overviewRulerColor": "grey"
         }
+    ],
+    "todohighlight.defaultStyle": {
+    
+
+
+    },
+    "files.autoSave": "afterDelay",
+    "git.enableSmartCommit": true,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "workbench.editorAssociations": {
+        "{git,gitlens}:/**/*.{md,csv,svg}": "default"
+    }
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.scss",
+        "**/*.java"
     ]
+}

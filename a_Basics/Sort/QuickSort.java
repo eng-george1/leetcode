@@ -4,13 +4,15 @@ import java.util.Arrays;
 
 public class QuickSort {
     /*
-     * https://www.youtube.com/watch?v=EdIKIf9mHk0&list=PLOmdoKois7_FK-
-     * ySGwHBkltzB11snW7KQ&ab_channel=megaovermoc
+     * https://www.youtube.com/playlist?list=PLOmdoKois7_FK-ySGwHBkltzB11snW7KQ
+     * https://www.youtube.com/watch?v=Vtckgz38QHs&ab_channel=BroCode
      */
     public static void main(String[] args) {
         System.out.println("Hello");
         int[] array = new int[] { 5, 2, 3, 1 };
-        bubbleSort(array);
+        quickSort(array,0,array.length-1);
+        System.out.println(Arrays.toString(array));
+        quickSort(array);
         System.out.println(Arrays.toString(array));
     }
 
@@ -62,6 +64,7 @@ public class QuickSort {
     // places the pivot element at its correct position
     // in sorted array, and places all smaller to left
     // of pivot and all greater elements to right of pivot
+    // [7,3,2,5,4,1,6]
     static int partition(int[] arr, int low, int high) {
         // Choosing the pivot
         int pivot = arr[high];

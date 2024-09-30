@@ -25,7 +25,11 @@ public class InsertionSort {
      * Stability: a stable sorting algorithm
      * Disadvantage:
      * O(n^2)
-     * Not in-place
+     * Inefficiency for large data sets: Insertion sort is not very efficient for large data sets. 
+     * It is generally recommended to not use insertion sort for lists larger than a couple thousand items.
+     * Less efficient than other sorting algorithms: Insertion sort is not as efficient as other sorting algorithms, such as merge sort and quick sort, for most cases. 
+       Requires more writes than selection sort: Insertion sort requires more writes to the array than selection sort. 
+     * Not suitable for parallel processing: Insertion sort is not suitable for parallel processing. 
      * #LastReview
      * #Review
      * #Idea:

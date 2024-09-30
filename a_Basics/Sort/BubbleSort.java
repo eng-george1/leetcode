@@ -51,11 +51,18 @@ public class BubbleSort {
             }
         }
     }
-
+    // #Idea: This is a clever way to swap two elements in an array without using a temporary variable, using bitwise XOR. Let's break it down:
     private static void swap(int[] nums, int i, int j) {
         nums[i] = nums[i] ^ nums[j];
         nums[j] = nums[i] ^ nums[j];
         nums[i] = nums[i] ^ nums[j];
     }
+     // #Idea:This version is easier to understand and has no significant performance drawbacks compared to the XOR method in most practical applications.
+    private static void swap2(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    
 
 }

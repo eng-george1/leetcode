@@ -1,2 +1,12 @@
 Dray run: try examples without running 
 A brute force (or naive) solution a straightforward method
+
+
+
+Sort Algorithms 
+
+Quick Sort     O(Logn)   O(nLogn)  O(nLogn) O(n^2) not stable, select pivot and have right and left 
+Merge sort     O(nLogn)  O(nLogn)  O(nLogn) o(n) stable divided into two array and sort each one
+Bubble sort    O(n)      o(n^2)    o(n^2)   O(1) stable swap until largest element at the end and repeat
+Insertion sort O(n)      o(n^2)    o(n^2)   O(1) stable swap but with back 
+Selection sort O(n^2)    o(n^2)    o(n^2)   O(1) stable like bubble except swap one time the max/min with last/first

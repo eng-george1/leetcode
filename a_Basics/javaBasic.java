@@ -1,8 +1,10 @@
 package a_Basics;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 public class javaBasic {
@@ -46,6 +48,13 @@ public class javaBasic {
         Math.abs(-5);
         // Modulus remainder
         int x = 6 % 5; // 1
-
+        //define min heap
+         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+         for (int i = 0; i < 5; i++) {
+            minHeap.offer(i);// same like add but without exception if the heap full
+         }
+         minHeap.poll();// remove the root(min)
+         minHeap.peek();//get root element without remove it
+         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());    
     }
 }

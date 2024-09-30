@@ -58,6 +58,7 @@ public class twoSumII {
     /*
      * TC:O(n) SC: O(n)
      * #Notes
+     * Your solution must use only constant extra space.
      * #Review
      * #Idea:two pointers and if sum>target move righ pointer
      * This will work perefct for sorted
@@ -76,7 +77,7 @@ public class twoSumII {
     }
 
     // #Idea:use hashmap and put the complementary(target-number[i])
-    // this is perefct solution for unsorted 
+    // this is perefct solution for unsorted
     public static int[] twoSum1(int[] numbers, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < numbers.length; i++) {
