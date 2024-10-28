@@ -10,3 +10,9 @@ Merge sort     O(nLogn)  O(nLogn)  O(nLogn) o(n) stable divided into two array a
 Bubble sort    O(n)      o(n^2)    o(n^2)   O(1) stable swap until largest element at the end and repeat
 Insertion sort O(n)      o(n^2)    o(n^2)   O(1) stable swap but with back 
 Selection sort O(n^2)    o(n^2)    o(n^2)   O(1) stable like bubble except swap one time the max/min with last/first
+
+In-place Sorting: An in-place sorting algorithm uses constant space for producing the output (modifies the given array only) or copying elements to a temporary storage. Examples: Selection Sort, Bubble Sort Insertion Sort and Heap Sort.
+Internal Sorting: Internal Sorting is when all the data is placed in the main memory or internal memory. In internal sorting, the problem cannot take input beyond its size. Example: heap sort, bubble sort, selection sort, quick sort, shell sort, insertion sort.
+External Sorting : External Sorting is when all the data that needs to be sorted cannot be placed in memory at a time, the sorting is called external sorting. External Sorting is used for the massive amount of data. Examples: Merge sort, Tag sort, Polyphase sort, Four tape sort, External radix sort, etc.
+Stable sorting: When two same items appear in the same order in sorted data as in the original array called stable sort. Examples: Merge Sort, Insertion Sort, Bubble Sort.
+Unstable sorting: When two same data appear in the different order in sorted data it is called unstable sort. Examples: Selection Sort, Quick Sort, Heap Sort, Shell Sort.
