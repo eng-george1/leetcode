@@ -64,5 +64,6 @@ public class myAtoi {
         for(char ch :s.toCharArray()){
 
         }
+        return 0;
     }
 }
