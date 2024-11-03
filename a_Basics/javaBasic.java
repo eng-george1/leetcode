@@ -1,8 +1,10 @@
 package a_Basics;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -52,7 +54,24 @@ public class javaBasic {
         while (!stack.isEmpty()) {
             result1[index--] = stack.pop();
         }
+         // Create a Queue
+         Queue<Integer> queue = new LinkedList<>();
+         // Adding elements to the queue
+         queue.add(1);
+         queue.offer(2);
+         queue.poll();
+         queue.peek();
+         queue.remove();
 
+          // Initialize a Deque using ArrayDeque
+        Deque<String> deque = new ArrayDeque<>();
+
+        // Adding elements to both ends
+        deque.addFirst("Element 1 (Front)");  // Adding to the front
+        deque.addLast("Element 2 (End)");     // Adding to the end
+        deque.getFirst();
+        deque.getLast();
+        
         // Absolute value
         Math.abs(-5);
         // Modulus remainder
@@ -72,14 +91,6 @@ public class javaBasic {
         // Ascending
         PriorityQueue<int[]> pqMin = new PriorityQueue<>((a, b) -> Integer.compare(a[1], b[1]));
 
-        // Create a Queue
-        Queue<Integer> queue = new LinkedList<>();
-
-        // Adding elements to the queue
-        queue.add(1);
-        queue.offer(2);
-        queue.poll();
-        queue.peek();
-        queue.remove();
+       
     }
 }
