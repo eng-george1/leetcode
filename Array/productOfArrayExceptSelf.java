@@ -43,6 +43,7 @@ public class productOfArrayExceptSelf {
      * [1, 2, 3, 4]
      * [1, 1, 2 ,6]//before 1,1*1,1*1*2,1*1*2*3
      * [24,12,4 ,1]//after 1,1*4,1*3*4,1*4*12*2 reverse
+     * may have some items with zero value
      */
     public static int[] productExceptSelf(int[] nums) {
         int[] prefix = new int[nums.length];
@@ -93,4 +94,5 @@ public class productOfArrayExceptSelf {
         }
         return nums;
     }
+
 }

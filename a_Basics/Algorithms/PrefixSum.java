@@ -1,5 +1,6 @@
 package a_Basics.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +21,12 @@ public class PrefixSum {
         System.out.println("Sum of range (1, 3): " + rangeSum(prefix, 1, 3)); // Output: 9
         System.out.println("Sum of range (0, 4): " + rangeSum(prefix, 0, 4)); // Output: 15
 
-         List<Integer> arr1 = Arrays.asList(1, 2, 3, -1, 4);
+        List<Integer> arr1 = Arrays.asList(1, 2, 3, -1, 4);
         int target = 3;
         int result = subarraySumTotal(arr1, target);
-        System.out.println("Number of subarrays with sum " + target + ": " + result); // Expected output depends on the input
-
+        System.out.println("Number of subarrays with sum " + target + ": " + result); // Expected output depends on the
+                                                                                      // input
+         subarraySum(arr1, target);
     }
 
     /*
@@ -38,7 +40,7 @@ public class PrefixSum {
         int[] prefix = new int[arr.length + 1];
         prefix[0] = 0;
         for (int i = 0; i < arr.length; i++) {
-            prefix[i+1] = prefix[i] + arr[i];
+            prefix[i + 1] = prefix[i] + arr[i];
         }
         return prefix;
     }
@@ -63,7 +65,7 @@ public class PrefixSum {
         return null;
     }
 
-     public static int subarraySumTotal(List<Integer> arr, int target) {
+    public static int subarraySumTotal(List<Integer> arr, int target) {
         HashMap<Integer, Integer> prefixSums = new HashMap<>();
         prefixSums.put(0, 1); // since empty array's sum is 0
         int curSum = 0;
@@ -83,5 +85,28 @@ public class PrefixSum {
         return count;
     }
 
+    public static void getPrefix(int[] nums) {
+        int[] prefix = new int[nums.length + 1];
+        prefix[0] = 0;
+        for (int i = 0; i < nums.length; i++) {
+            prefix[i + 1] = prefix[i] + nums[i];
+        }
+        int start = 0, end = 5;
+        int sum = prefix[start + 1] - prefix[end];
+    }
 
+    public static List<Integer> subArraySum(int[] nums, int target) {
+        HashMap<Integer, Integer> prefix = new HashMap<>();
+        int currSum = 0;
+        prefix.put(0, 0);
+        for (int i = 0; i < nums.length; i++) {
+            currSum += nums[i];
+            if (prefix.containsKey(target - currSum))
+                // result
+                return List.of(prefix.get(target - currSum), i + 1);
+            prefix.put(currSum, i + 1);
+
+        }
+        return null;
+    }
 }
