@@ -36,9 +36,10 @@ public class reorganizeString {
      * #Idea:
      */
     public static String reorganizeString(String s) {
-        int[] freq = new int[26];
+       
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(b[1], a[1]));
         // o(n)
+        int[] freq = new int[26];
         for (char c : s.toCharArray()) {
             freq[c - 'a']++;
         }
