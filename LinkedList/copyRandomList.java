@@ -2,6 +2,10 @@ package LinkedList;
 
 import java.util.HashMap;
 
+import org.w3c.dom.Node;
+
+import a_Basics.LinkedList.ListNode;
+
 public class copyRandomList {
     /*
      * https://leetcode.com/problems/copy-list-with-random-pointer/description/
@@ -28,12 +32,13 @@ public class copyRandomList {
      */
     public static void main(String[] args) {
         System.out.println("Hello");
-        System.out.println(Node.generatNode(new Integer[][] { { 7, null }, { 13, 0 }, { 11, 4 }, { 10, 2 }, { 1, 0 } })
-                .toString());
+        System.out.println(
+                ListNode.generateNode(new Integer[][] { { 7, null }, { 13, 0 }, { 11, 4 }, { 10, 2 }, { 1, 0 } })
+                        .toString());
         System.out.println(copyRandomList1(
-                Node.generatNode(new Integer[][] { { 7, null }, { 13, 0 }, { 11, 4 }, { 10, 2 }, { 1, 0 } }))
+                ListNode.generateNode(new Integer[][] { { 7, null }, { 13, 0 }, { 11, 4 }, { 10, 2 }, { 1, 0 } }))
                 .toString());
-        System.out.println(copyRandomList1(Node.generatNode(new Integer[][] { { -1, 0 } })).toString());
+        System.out.println(copyRandomList1(ListNode.generateNode(new Integer[][] { { -1, 0 } })).toString());
     }
 
     /*
@@ -50,112 +55,39 @@ public class copyRandomList {
      * #Notes
      * #LastReview
      * #Review
-     * #Idea:
+     * #Idea:Hashmap to map the old and new nodes and then fix next and random
      */
-    public static class Node {
-        int val;
-        Node next;
-        Node random;
-
-        public Node(int val) {
-            this.val = val;
-            this.next = null;
-            this.random = null;
-        }
-
-        public static Node generatNode(Integer[][] arrIntegers) {
-            Node node = new Node(arrIntegers[0][0]);
-            if (arrIntegers[0][1] != null)
-                node.random = new Node(arrIntegers[0][1]);
-            Node currNode = node;
-
-            for (int i = 1; i < arrIntegers.length; i++) {
-                currNode.next = new Node(arrIntegers[i][0]);
-                currNode = currNode.next;
-                if (arrIntegers[i][1] != null) {
-                    currNode.random = new Node(arrIntegers[i][1]);
-                }
-            }
-            return node;
-        }
-
-        public String toString() {
-            Node currentNode = this;
-            StringBuilder stringBuilder = new StringBuilder();
-            while (currentNode != null) {
-                if (currentNode.random != null)
-                    stringBuilder.append("Node:" + currentNode.val + " Random:" + currentNode.random.val);
-                else
-                    stringBuilder.append("Node:" + currentNode.val + " Random: Null");
-                stringBuilder.append(System.lineSeparator());
-                currentNode = currentNode.next;
-            }
-            return stringBuilder.toString();
-        }
-    }
-
-    public static Node copyRandomList(Node head) {
+    public static ListNode copyRandomList(ListNode head) {
         if (head == null)
             return null;
-        // duplicate the nodes
-        Node current = head;
+        HashMap<ListNode, ListNode> map = new HashMap<>();
+        // duplicate the nodes and put in the map
+        ListNode current = head;
         while (current != null) {
-            Node newNode = new Node(current.val);
-            newNode.next = current.next;
-            current.next = newNode;
-            current = newNode.next;
-        }
-
-        // fix the random pointer
-        current = head;
-        while (current != null) {
-            if (current.random != null)
-                current.next.random = current.random.next;
-            current = current.next.next;
-        }
-
-        // get the new list only and fix the original
-        Node newHead = head.next;
-        current = head;
-        Node currentNew = newHead;
-        while (current != null) {
-            current.next = current.next.next;
+            ListNode newNode = new ListNode(current.val);
+            map.put(current, newNode);
             current = current.next;
-            if (current != null)
-                currentNew.next = current.next;
-            currentNew = currentNew.next;
         }
-        return newHead;
+
+        // fix the random pointer and next
+        current = head;
+        while (current != null) {
+            ListNode newNode = map.get(current);
+            newNode.next = map.get(current.next);
+            newNode.random = map.get(current.random);
+        }
+        return map.get(head);
     }
 
-    static HashMap<Node, Node> visited = new HashMap<Node, Node>();
-
-    public static Node getClonedNode(Node node) {
-        // If the node exists then
-        if (node != null) {
-            // Check if the node is in the visited dictionary
-            if (visited.containsKey(node)) {
-                // If its in the visited dictionary then return the new node reference from the
-                // dictionary
-                return visited.get(node);
-            } else {
-                // Otherwise create a new node, add to the dictionary and return it
-                visited.put(node, new Node(node.val));
-                return visited.get(node);
-            }
-        }
-        return null;
-    }
-
-    public static Node copyRandomList1(Node head) {
+    public static ListNode copyRandomList1(ListNode head) {
         if (head == null) {
             return null;
         }
 
-        Node oldNode = head;
+        ListNode oldNode = head;
 
         // Creating the new head node.
-        Node newNode = new Node(oldNode.val);
+        ListNode newNode = new ListNode(oldNode.val);
         visited.put(oldNode, newNode);
 
         // Iterate on the linked list until all nodes are cloned.
@@ -171,26 +103,57 @@ public class copyRandomList {
         return visited.get(head);
     }
 
-    public static Node copyRandomList2(Node head) {
-        if (head == null)
-            return null;
-        HashMap<Node, Node> map = new HashMap<>();
-        // duplicate the nodes and put in the map
-        Node current = head;
-        while (current != null) {
-            Node newNode = new Node(current.val);
-            map.put(current, newNode);
-            current = current.next;
-        }
+    static HashMap<ListNode, ListNode> visited = new HashMap<ListNode, ListNode>();
 
-        // fix the random pointer and next
-        current = head;
-        while (current != null) {
-            Node newNode = map.get(current);
-            newNode.next = map.get(current.next);
-            newNode.random = map.get(current.random);
+    public static ListNode getClonedNode(ListNode node) {
+        // If the node exists then
+        if (node != null) {
+            // Check if the node is in the visited dictionary
+            if (visited.containsKey(node)) {
+                // If its in the visited dictionary then return the new node reference from the
+                // dictionary
+                return visited.get(node);
+            } else {
+                // Otherwise create a new node, add to the dictionary and return it
+                visited.put(node, new ListNode(node.val));
+                return visited.get(node);
+            }
         }
-        return map.get(head);
+        return null;
     }
 
+    // duplicate each node with new node and make it next to the old one
+    public static ListNode copyRandomList02(ListNode head) {
+        if (head == null)
+            return null;
+        // duplicate the nodes
+        ListNode current = head;
+        while (current != null) {
+            ListNode newNode = new ListNode(current.val);
+            newNode.next = current.next;
+            current.next = newNode;
+            current = newNode.next;
+        }
+
+        // fix the random pointer
+        current = head;
+        while (current != null) {
+            if (current.random != null)
+                current.next.random = current.random.next;
+            current = current.next.next;
+        }
+
+        // get the new list only and fix the original
+        ListNode newHead = head.next;
+        current = head;
+        ListNode currentNew = newHead;
+        while (current != null) {
+            current.next = current.next.next;
+            current = current.next;
+            if (current != null)
+                currentNew.next = current.next;
+            currentNew = currentNew.next;
+        }
+        return newHead;
+    }
 }

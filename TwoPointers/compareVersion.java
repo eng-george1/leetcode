@@ -2,7 +2,7 @@ package TwoPointers;
 
 import java.util.List;
 
-public class solution {
+public class compareVersion {
     /*
      * https://leetcode.com/problems/compare-version-numbers/description/
      * 165. Compare Version Numbers

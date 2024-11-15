@@ -1,4 +1,4 @@
-//package ;
+package Tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import javax.swing.tree.TreeNode;
+import a_Basics.TreeNode;
+
+
 
 public class distanceK {
     /*
@@ -17,27 +19,19 @@ public class distanceK {
     public static void main(String[] args) {
         System.out.println("Hello");
         Integer[] nodes = { 3, 5, 1, 6, 2, 0, 8, null, null, 7, 4 };
-        TreeNode root = buildTree(nodes);
+        TreeNode root =TreeNode.buildTree(nodes);
         System.out.println(distanceK(root, root.left, 2));
 
         Integer[] nodes1 = { 0, null, 1, null, 2, null, 3 };
-        TreeNode root1 = buildTree(nodes1);
+        TreeNode root1 = TreeNode.buildTree(nodes1);
         System.out.println(distanceK(root1, root1.right, 2));
 
         Integer[] nodes2 = { 0, 1, null, 3, 2 };
-        TreeNode root2 = buildTree(nodes2);
+        TreeNode root2 = TreeNode.buildTree(nodes2);
         System.out.println(distanceK(root2, root2.left.right, 1));
     }
 
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        public TreeNode(int x) {
-            val = x;
-        }
-    }
+  
 
     /*
      * TC:O(n) SC: O(n)
@@ -98,34 +92,4 @@ public class distanceK {
         return answer;
     }
 
-    // Method to build the tree from an array
-    public static TreeNode buildTree(Integer[] nodes) {
-        if (nodes == null || nodes.length == 0)
-            return null;
-
-        TreeNode root = new TreeNode(nodes[0]);
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        int i = 1;
-
-        while (i < nodes.length) {
-            TreeNode current = queue.poll();
-
-            // Left child
-            if (nodes[i] != null) {
-                current.left = new TreeNode(nodes[i]);
-                queue.add(current.left);
-            }
-            i++;
-
-            // Right child
-            if (i < nodes.length && nodes[i] != null) {
-                current.right = new TreeNode(nodes[i]);
-                queue.add(current.right);
-            }
-            i++;
-        }
-
-        return root;
-    }
-}
+   }

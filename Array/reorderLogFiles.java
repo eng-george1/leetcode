@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class solution {
+public class reorderLogFiles {
     /*
      * https://leetcode.com/problems/reorder-data-in-log-files/description/
      * 937. Reorder Data in Log Files
