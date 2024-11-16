@@ -3,7 +3,7 @@ package Tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import a_Basics.TreeNode;
+import a_Basics.Tree.TreeNode;
 
 public class isValidBST {
     /*
