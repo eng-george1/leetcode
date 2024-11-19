@@ -48,11 +48,12 @@ public class isValidBST {
      * #Review
      * #Idea:
      */
-     // O(n) O(n)
+    // O(n) O(n)
     public static boolean isValidBST(TreeNode root) {
         return validate(root, null, null);
     }
 
+    // Need-Memorize
     public static boolean validate(TreeNode root, Integer low, Integer high) {
         // Empty trees are valid BSTs.
         if (root == null) {

@@ -38,6 +38,13 @@ and in setting.json add
             "color": "#8cd927",
             "backgroundColor": "white",
             "overviewRulerColor": "grey"
+        },
+         "Need-Memorize:",
+        {
+            "text": "Need-Memorize",
+            "color": "#fc2c03",
+            "backgroundColor": "white",
+            "overviewRulerColor": "grey"
         }
     ],
     "todohighlight.defaultStyle": {

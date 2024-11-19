@@ -30,7 +30,7 @@ public class zigzagLevelOrder {
         TreeNode root = TreeNode.buildTree(nodes);
         System.out.println(zigzagLevelOrder(root));
 
-        Integer[] nodes2 = { 1,2,3,4,null,null,5};
+        Integer[] nodes2 = { 1, 2, 3, 4, null, null, 5 };
         TreeNode root2 = TreeNode.buildTree(nodes2);
         System.out.println(zigzagLevelOrder(root2));
 
@@ -43,7 +43,7 @@ public class zigzagLevelOrder {
      * #Review
      * #Idea: if odd add 0,node.vale if even add the node.val
      */
-  static  List<List<Integer>> ans;
+    static List<List<Integer>> ans;
 
     public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         ans = new ArrayList<>();
@@ -51,6 +51,7 @@ public class zigzagLevelOrder {
         return ans;
     }
 
+    // Need-Memorize
     private static void recursion(TreeNode node, int level) {
         if (node == null)
             return;
@@ -64,5 +65,4 @@ public class zigzagLevelOrder {
         recursion(node.right, level + 1);
     }
 
-    
 }
