@@ -17,7 +17,7 @@ public class BubbleSort {
     /*
      * TC:O(n^2) SC: O(1)
      * #Notes
-     * swap until you put the max in the end every iteration
+     * swap until you put the max in the end every iteration 
      * https://www.geeksforgeeks.org/bubble-sort/
      * Best O(n) If the list is already sorted
      * average and worst Case: O(n^2)Space Complexity: O(1)
@@ -25,7 +25,6 @@ public class BubbleSort {
      * Stability: a stable sorting algorithm
      * Disadvantage:
      * O(n^2)
-     * Not in-place
      * #LastReview
      * #Review
      * #Idea:
@@ -51,18 +50,21 @@ public class BubbleSort {
             }
         }
     }
-    // #Idea: This is a clever way to swap two elements in an array without using a temporary variable, using bitwise XOR. Let's break it down:
+
+    // #Idea: This is a clever way to swap two elements in an array without using a
+    // temporary variable, using bitwise XOR. Let's break it down:
     private static void swap(int[] nums, int i, int j) {
         nums[i] = nums[i] ^ nums[j];
         nums[j] = nums[i] ^ nums[j];
         nums[i] = nums[i] ^ nums[j];
     }
-     // #Idea:This version is easier to understand and has no significant performance drawbacks compared to the XOR method in most practical applications.
+
+    // #Idea:This version is easier to understand and has no significant performance
+    // drawbacks compared to the XOR method in most practical applications.
     private static void swap2(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
     }
-    
 
 }

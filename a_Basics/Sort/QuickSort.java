@@ -10,7 +10,7 @@ public class QuickSort {
     public static void main(String[] args) {
         System.out.println("Hello");
         int[] array = new int[] { 5, 2, 3, 1 };
-        quickSort(array,0,array.length-1);
+        quickSort(array, 0, array.length - 1);
         System.out.println(Arrays.toString(array));
         quickSort(array);
         System.out.println(Arrays.toString(array));
@@ -114,6 +114,7 @@ public class QuickSort {
         }
         int[] result = new int[array.length];
         if (leftIndex != 0) {
+            // resize
             leftArr = Arrays.copyOf(leftArr, leftIndex);
             System.arraycopy(quickSort(leftArr), 0, result, 0, leftIndex);
         }
