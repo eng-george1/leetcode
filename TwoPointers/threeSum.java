@@ -53,7 +53,7 @@ public class threeSum {
     }
 
     /*
-     * TC:O(n) SC: O(n)
+     * TC:O(n^2) SC: O(1)
      * #Notes
      * #Review
      * #Idea:
@@ -74,10 +74,12 @@ public class threeSum {
             while (left < right) {
                 int total = nums[i] + nums[left] + nums[right];
                 if (total == 0) {
-                   result.add(Arrays.asList(nums[i], nums[left], nums[right]));
-                   //#Idea: skip all the duplicated
-                   while(left<nums.length-1 &&nums[left]==nums[left+1])left++;
-                   while(right>0 &&nums[right]==nums[right-1])right--;
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    // #Idea: skip all the duplicated
+                    while (left < nums.length - 1 && nums[left] == nums[left + 1])
+                        left++;
+                    while (right > 0 && nums[right] == nums[right - 1])
+                        right--;
                     left++;
                     right--;
                 } else if (total > 0)
@@ -88,23 +90,24 @@ public class threeSum {
         }
         return result;
     }
-   //using Hashmap
+
+    // using Hashmap
     public static List<List<Integer>> threeSum1(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
         HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length ; i++) {
+        for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], i);
         }
-        //len-2
-        for (int i = 0; i < nums.length-2 ; i++) {
+        // len-2
+        for (int i = 0; i < nums.length - 2; i++) {
             if (i > 0 && nums[i] == nums[i - 1])
                 continue;
-                if (nums[i] > 0)
+            if (nums[i] > 0)
                 break;
-                //len-1
-            for (int j = i + 1; j < nums.length-1; j++) {
-               
+            // len-1
+            for (int j = i + 1; j < nums.length - 1; j++) {
+
                 int required = -1 * (nums[i] + nums[j]);
                 if (map.containsKey(required) && map.get(required) > j)
                     result.add(Arrays.asList(nums[i], nums[j], required));
