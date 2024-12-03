@@ -1,9 +1,6 @@
 package LinkedList;
 
 import java.util.Stack;
-
-import SlidingWindow.numberOfSubarrays;
-import a_Basics.LinkedList;
 import a_Basics.LinkedList.ListNode;
 
 public class reverseKGroup {
@@ -83,12 +80,10 @@ public class reverseKGroup {
     public static ListNode reverseKGroup1(ListNode head, int k) {
         if (head == null || k <= 1)
             return head;
-
         Stack<ListNode> stack = new Stack<>();
         ListNode dummy = new ListNode(-1);
         ListNode currentResult = dummy;
         ListNode current = head;
-
         while (current != null) {
             int count = 0;
             // Push nodes into the stack until we reach k nodes or the end of the list
@@ -97,7 +92,6 @@ public class reverseKGroup {
                 current = current.next;
                 count++;
             }
-
             // If we have a full group, pop from the stack to reverse the nodes
             if (count == k) {
                 while (!stack.isEmpty()) {

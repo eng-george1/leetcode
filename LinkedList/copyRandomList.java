@@ -79,6 +79,7 @@ public class copyRandomList {
         return map.get(head);
     }
 
+    static HashMap<ListNode, ListNode> visited = new HashMap<ListNode, ListNode>();
     public static ListNode copyRandomList1(ListNode head) {
         if (head == null) {
             return null;
@@ -102,8 +103,6 @@ public class copyRandomList {
         }
         return visited.get(head);
     }
-
-    static HashMap<ListNode, ListNode> visited = new HashMap<ListNode, ListNode>();
 
     public static ListNode getClonedNode(ListNode node) {
         // If the node exists then

@@ -32,36 +32,41 @@ public class longestPalindromicSubstring {
 
     /*
      * TC:O(n^2) SC: O(1)
-     * #Notes substring (i,j+1), we can have two pointers and from  middle and from longest to smalles
+     * #Notes substring (i,j+1), we can have two pointers and from middle and from
+     * longest to smalles
      * #Review
      */
-  static  int startI = 0;
-   static int endI = 0;
+    private static int startIndex = 0;
+    private static int endIndex = 0;
+    public static String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) {
+            return "";
+        }
+        for (int i = 0; i < s.length(); i++) {
+            // Expand around a single character (odd-length palindrome)
+            expandAroundCenter(s, i, i);
+            // Expand around two characters (even-length palindrome)
+            expandAroundCenter(s, i, i + 1);
+        }
+        return s.substring(startIndex, endIndex + 1);
+    }
+    private static void expandAroundCenter(String s, int left, int right) {
+        // Expand as long as the characters on both sides are equal
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        // Check if the current palindrome is the longest found so far
+        if (endIndex - startIndex < right - left - 2) {
+            startIndex = left + 1;
+            endIndex = right - 1;
+        }
+    }
 
-   public static String longestPalindrome(String s) {
-       int left = 0;
-       int right = 0;
-       for (int i = 0; i < s.length(); i++) {
-           expandarroundCenter(s, i, i);
-           expandarroundCenter(s, i, i + 1);
-
-       }
-       return s.substring(startI, endI + 1);
-   }
-   private static void expandarroundCenter(String s, int left, int right) {
-       while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-           left--;
-           right++;
-       }
-       if (endI - startI + 1 < right - left - 1) {
-           startI = left + 1;
-           endI = right - 1;
-       }
-   }
-     /*
+    /*
      * TC:O(n^2) SC: O(1)
      * #Notes good solution but not the best
-
+     * 
      */
     public static String longestPalindrome01(String s) {
         if (s.isBlank() || s.isEmpty() || s.length() == 1)
@@ -82,7 +87,7 @@ public class longestPalindromicSubstring {
         String res = "";
         while (left >= 0 && right < s.length()) {
             if (s.charAt(left) == s.charAt(right))
-                res = s.substring(left, right+1);
+                res = s.substring(left, right + 1);
             else
                 return res;
             left--;

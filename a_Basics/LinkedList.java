@@ -70,15 +70,17 @@ public class LinkedList {
 
     // o(n) o(1)
     public ListNode reverseList(ListNode head) {
+        //1,2,3,4
         ListNode prev = null;
-        ListNode curr = head;
+        ListNode curr = head;//1
         while (curr != null) {
-            ListNode nextTemp = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = nextTemp;
+            ListNode nextTemp = curr.next;//2  curr=2, 3
+            curr.next = prev;//2->null   1
+            prev = curr;//1   2
+            curr = nextTemp;//2  3
+            //2,1
         }
-        return prev;
+        return prev;//return the new head
     }
 
     // O(n) O(n)
