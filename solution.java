@@ -8,11 +8,11 @@ public class solution {
     }
 
     /*
-     * TC:O(n) SC: O(n)
      * #Notes
      * #LastReview
      * #Review
      * #Idea:
+     *  TC:O(n) SC: O(n)
      */
 
 }

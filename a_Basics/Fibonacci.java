@@ -19,4 +19,18 @@ public class Fibonacci {
         }
         return b;
     }
+
+    public int fib(int n) {
+        if (n == 0)
+            return 0;
+        if (n <= 2)
+            return 1;
+        int first = 1, second = 1;
+        for (int i = 3; i <= n; i++) {
+            int temp = first;
+            first += second;
+            second = temp;
+        }
+        return first;
+    }
 }
