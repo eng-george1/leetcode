@@ -47,17 +47,43 @@ public class wordBreakII {
      * #Review
      * #Idea:
      */
-
+    //O(mX2^m) O(2^m) we can replace current as string builder
     public static List<String> wordBreak(String s, List<String> wordDict) {
+        Set<String> wordSet = new HashSet<>(wordDict); // Convert wordDict to a Set for quick lookups
+        List<String> result = new ArrayList<>();
+        backtrack(s, wordSet, 0, new ArrayList<>(), result);
+        return result;
+    }
+    private static void backtrack(String s, Set<String> wordSet, int start, List<String> current, List<String> result) {
+        // Base case: if we reach the end of the string, add the current path to result
+        if (start == s.length()) {
+            result.add(String.join(" ", current));
+            return;
+        }
+        // Explore each substring starting from the current index
+        for (int end = start + 1; end <= s.length(); end++) {
+            String word = s.substring(start, end);
+            if (wordSet.contains(word)) {
+                // Choose: add the word to the current list
+                current.add(word);
+                // Recurse
+                backtrack(s, wordSet, end, current, result);
+                // Backtrack: remove the last word added
+                current.remove(current.size() - 1);
+            }
+        }
+    }
+     
+    public static List<String> wordBreak01(String s, List<String> wordDict) {
         // Convert wordDict list to a Set for quick lookup of words
         Set<String> words = new HashSet<>(wordDict);
         List<String> ans = new ArrayList<>(); // List to store all possible sentences
-        backtrack(s, words, ans, new StringBuilder(), 0); // Start backtracking from index 0
+        backtrack01(s, words, ans, new StringBuilder(), 0); // Start backtracking from index 0
         return ans;
     }
 
     // Backtracking function to generate sentences
-    private static void backtrack(String s, Set<String> words, List<String> ans, StringBuilder sb, int start) {
+    private static void backtrack01(String s, Set<String> words, List<String> ans, StringBuilder sb, int start) {
         // Base case: if we have reached the end of the string, add the current sentence
         // to results
         if (start == s.length()) {
@@ -78,7 +104,7 @@ public class wordBreakII {
                 sb.append(word).append(" ");
 
                 // Recurse with the next starting index
-                backtrack(s, words, ans, sb, end + 1);
+                backtrack01(s, words, ans, sb, end + 1);
 
                 // Backtrack by resetting the StringBuilder to its previous length
                 sb.setLength(len);
@@ -133,34 +159,4 @@ public class wordBreakII {
         return result;
     }
 
-    public static List<String> wordBreak1(String s, List<String> wordDict) {
-        Set<String> wordSet = new HashSet<>(wordDict); // Convert wordDict to a Set for quick lookups
-        List<String> result = new ArrayList<>();
-        backtrack1(s, wordSet, 0, new ArrayList<>(), result);
-        return result;
-    }
-
-    private static void backtrack1(String s, Set<String> wordSet, int index, List<String> current,
-            List<String> result) {
-        // Base case: if we reach the end of the string, add the current path to result
-        if (index == s.length()) {
-            result.add(String.join(" ", current));
-            return;
-        }
-
-        // Explore each substring starting from the current index
-        for (int j = index + 1; j <= s.length(); j++) {
-            String word = s.substring(index, j);
-            if (wordSet.contains(word)) {
-                // Choose: add the word to the current list
-                current.add(word);
-
-                // Recurse
-                backtrack1(s, wordSet, j, current, result);
-
-                // Backtrack: remove the last word added
-                current.remove(current.size() - 1);
-            }
-        }
-    }
 }

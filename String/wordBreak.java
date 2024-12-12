@@ -8,7 +8,7 @@ public class wordBreak {
     /*
      * https://leetcode.com/problems/word-break/description/
      * https://www.youtube.com/watch?v=QgLKdluDo08&ab_channel=NeetCodeIO
-     * 139. Word Break 
+     * 139. Word Break
      * Given a string s and a dictionary of strings wordDict, return true if s can
      * be segmented into a space-separated sequence of one or more dictionary words.
      * Note that the same word in the dictionary may be reused multiple times in the
@@ -33,18 +33,20 @@ public class wordBreak {
     }
 
     /*
-     * TC:O(n^2) SC: O(n)
      * #Notes
      * #LastReview Yes
      * #Review
-     * #Idea: using dynamic pro by caching the before checked you should review the backtracking
+     * #Idea: using dynamic pro by caching the before checked you should review the
+     * backtracking
+     * we can iterate throw the dic or throw the string
+     * TC:O(m^2) worst case O(m^2Xn) where n wordDict.len and m=s.len SC: O(m+n)
      */
     public static boolean wordBreak(String s, List<String> wordDict) {
         Set<String> wordSet = new HashSet<>(wordDict); // Convert wordDict to a set for faster lookups
         boolean[] dp = new boolean[s.length() + 1];
         dp[0] = true; // An empty string can always be segmented
         for (int i = 1; i <= s.length(); i++) {
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < i; j++) {// i is the end and j is the start
                 // Check if s[0:j] can be segmented (dp[j] is true) and s[j:i] is in wordDict
                 if (dp[j] && wordSet.contains(s.substring(j, i))) {
                     dp[i] = true;
@@ -56,26 +58,30 @@ public class wordBreak {
     }
 
     // Brute force solution using recursion backtracking O(2^n) space o(n)
+    // with memoization O(m^2Xn) space O(m+n)
     public boolean wordBreak1(String s, List<String> wordDict) {
         Set<String> wordSet = new HashSet<>(wordDict); // Convert wordDict to a set for faster lookups
-        return canBreak(s, wordSet, 0);
+        return canBreak(s, wordSet, 0, new boolean[s.length() + 1]);
     }
 
-    private boolean canBreak(String s, Set<String> wordSet, int start) {
+    private boolean canBreak(String s, Set<String> wordSet, int start, boolean[] memo) {
         // Base case: if we reach the end of the string, return true
         if (start == s.length()) {
             return true;
         }
-
+        if (memo[start])
+            return memo[start];
         // Try every possible end index for the current substring
         for (int end = start + 1; end <= s.length(); end++) {
             // Check if the substring s[start:end] is in the word set
-            if (wordSet.contains(s.substring(start, end)) && canBreak(s, wordSet, end)) {
+            if (wordSet.contains(s.substring(start, end)) && canBreak(s, wordSet, end, memo)) {
+                memo[start] = true;
                 return true;
             }
         }
 
         // If no valid segmentation found
+        memo[start] = false;
         return false;
     }
 }

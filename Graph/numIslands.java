@@ -74,9 +74,7 @@ public class numIslands {
 
     // BFS
     public int numIslandsBFS(char[][] grid) {
-        if (grid == null || grid.length == 0) {
-            return 0;
-        }
+        if (grid == null || grid.length == 0)   return 0;
         int nr = grid.length;
         int nc = grid[0].length;
         int num_islands = 0;

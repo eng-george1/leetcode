@@ -53,11 +53,11 @@ public class canFinish {
         }
 
         // Populate the adjacency list and in-degree array based on prerequisites.
-        // prerequisites[i] = [a, b] means to take course 'a', you must first take
-        // course 'b'.
+        // prerequisites[i] = [b, a] means to take course 'b', you must first take
+        // course 'a'.
         for (int[] prerequisite : prerequisites) {
-            adj.get(prerequisite[1]).add(prerequisite[0]); // Add edge b -> a
-            indegree[prerequisite[0]]++; // Increment in-degree of course 'a'
+            adj.get(prerequisite[1]).add(prerequisite[0]); // Add edge a -> b
+            indegree[prerequisite[0]]++; // Increment in-degree of course 'b'
         }
 
         // Queue to store courses with an in-degree of 0 (i.e., no prerequisites).

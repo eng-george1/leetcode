@@ -37,7 +37,7 @@ public class combinationSum {
         System.out.println("Hello");
         System.out.println(combinationSum(new int[] { 2, 3, 6, 7 }, 7));
 
-        System.out.println(combinationSum2(new int[] {10,1,2,7,6,1,5 }, 8));
+        System.out.println(combinationSum2(new int[] { 10, 1, 2, 7, 6, 1, 5 }, 8));
     }
 
     /*
@@ -50,17 +50,15 @@ public class combinationSum {
     // O(n^m) O(m) n array len and m is the target
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> results = new ArrayList<List<Integer>>();
-        LinkedList<Integer> comb = new LinkedList<Integer>();
-
-        backtrack(target, comb, 0, candidates, results);
+        backtrack(target, new ArrayList(), 0, candidates, results);
         return results;
     }
 
-    protected static void backtrack(int remain, LinkedList<Integer> comb, int start, int[] candidates,
+    protected static void backtrack(int remain, List<Integer> combinations, int start, int[] candidates,
             List<List<Integer>> results) {
         if (remain == 0) {
             // make a deep copy of the current combination
-            results.add(new ArrayList<Integer>(comb));
+            results.add(new ArrayList<Integer>(combinations));
             return;
         } else if (remain < 0) {
             // exceed the scope, stop exploration.
@@ -69,10 +67,10 @@ public class combinationSum {
         // exclude item did before to prevent duplication in result with diff order
         for (int i = start; i < candidates.length; ++i) {
             // add the number into the combination
-            comb.add(candidates[i]);
-            backtrack(remain - candidates[i], comb, i, candidates, results);
+            combinations.add(candidates[i]);
+            backtrack(remain - candidates[i], combinations, i, candidates, results);
             // backtrack, remove the number from the combination
-            comb.removeLast();
+            combinations.removeLast();
         }
     }
 
@@ -94,21 +92,43 @@ public class combinationSum {
         return dp[target];
     }
 
+    // we can use updown backtracking
+    public static List<List<Integer>> combinationSumUp(int[] candidates, int target) {
+        return backtrackUp(target, new ArrayList<>(), 0, candidates);
+    }
+
+    private static List<List<Integer>> backtrackUp(int remain, List<Integer> comb, int start, int[] candidates) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        if (remain == 0) {
+            result.add(new ArrayList<>(comb));
+            return result;
+        } else if (remain < 0) {
+            return result; // Return empty result list
+        }
+
+        for (int i = start; i < candidates.length; ++i) {
+            comb.add(candidates[i]);
+            result.addAll(backtrackUp(remain - candidates[i], comb, i, candidates));
+            comb.remove(comb.size() - 1);
+        }
+        return result;
+    }
+
     // 40. Combination Sum II
     // O(n^m) O(m) n array len and m is the target
     public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> results = new ArrayList<List<Integer>>();
-        LinkedList<Integer> comb = new LinkedList<Integer>();
         Arrays.sort(candidates);
-        backtrack2(target, comb, 0, candidates, results);
+        backtrack2(target, new ArrayList(), 0, candidates, results);
         return results;
     }
 
-    protected static void backtrack2(int remain, LinkedList<Integer> comb, int start, int[] candidates,
+    protected static void backtrack2(int remain, List<Integer> combinations, int start, int[] candidates,
             List<List<Integer>> results) {
         if (remain == 0) {
             // make a deep copy of the current combination
-            results.add(new ArrayList<Integer>(comb));
+            results.add(new ArrayList<Integer>(combinations));
             return;
         } else if (remain < 0) {
             // exceed the scope, stop exploration.
@@ -116,13 +136,13 @@ public class combinationSum {
         }
         // exclude item did before to prevent duplication in result with diff order
         for (int i = start; i < candidates.length; ++i) {
-            if(i!=start && candidates[i]==candidates[i-1])
-            continue;
+            if (i != start && candidates[i] == candidates[i - 1])
+                continue;
             // add the number into the combination
-            comb.add(candidates[i]);
-            backtrack2(remain - candidates[i], comb, i + 1, candidates, results);
+            combinations.add(candidates[i]);
+            backtrack2(remain - candidates[i], combinations, i + 1, candidates, results);
             // backtrack, remove the number from the combination
-            comb.removeLast();
+            combinations.removeLast();
         }
     }
 }

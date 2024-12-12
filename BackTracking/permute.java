@@ -41,9 +41,6 @@ public class permute {
      * TC:O(nXn!) SC: O(n) if not count the result
      */
     public static List<List<Integer>> permute(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return null;
-        }
         List<List<Integer>> result = new ArrayList<>();
         backTracking(nums, new ArrayList(), result);
         return result;
@@ -112,9 +109,6 @@ public class permute {
     // 47. Permutations II
     // O(nXn!) O(n) if not count the result or you can say O(nXn!)
     public static List<List<Integer>> permuteUnique(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return null;
-        }
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<>();
         backTrackingUnique(nums, new boolean[nums.length], new ArrayList(), result);
