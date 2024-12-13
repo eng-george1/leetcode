@@ -1,6 +1,7 @@
 package Tree;
 
 import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import a_Basics.Pair;
@@ -38,12 +39,63 @@ public class orangesRotting {
     }
 
     /*
-     * TC:O(n m) SC: O(nm)
      * #Notes
      * #LastReview
      * #Review
-     * #Idea: using the BFS and have count for the fresh and every change in the status fresh-- 
-     */   
+     * #Idea: using the BFS and add all rotting to the queue and have count for the fresh and every change in the
+     * status fresh--
+     * * TC:O(nXm) SC: O(nXm)
+     */
+    public int orangesRotting(int[][] grid) {
+        Queue<int[]> queue = new LinkedList<>();
+        int fresh = 0;
+        int mins = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 2) {
+                    queue.add(new int[] { i, j });
+                } else if (grid[i][j] == 1) {
+                    fresh++;
+                }
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int x = 0; x < size; x++) {
+                int i = queue.peek()[0];
+                int j = queue.peek()[1];
+
+                queue.remove();
+                if (i > 0 && grid[i - 1][j] == 1) {
+                    grid[i - 1][j] = 2;
+                    fresh--;
+                    queue.add(new int[] { i - 1, j });
+                }
+                if (j > 0 && grid[i][j - 1] == 1) {
+                    grid[i][j - 1] = 2;
+                    fresh--;
+                    queue.add(new int[] { i, j - 1 });
+                }
+                if (i < grid.length - 1 && grid[i + 1][j] == 1) {
+                    grid[i + 1][j] = 2;
+                    fresh--;
+                    queue.add(new int[] { i + 1, j });
+                }
+                if (j < grid[0].length - 1 && grid[i][j + 1] == 1) {
+                    grid[i][j + 1] = 2;
+                    fresh--;
+                    queue.add(new int[] { i, j + 1 });
+                }
+            }
+            if (!queue.isEmpty()) {
+                mins++;
+            }
+        }
+        return (fresh == 0) ? mins : -1;
+    }
+
     public int orangesRotting1(int[][] grid) {
         Queue<Pair<Integer, Integer>> queue = new ArrayDeque();
 
@@ -98,7 +150,9 @@ public class orangesRotting {
         // return elapsed minutes if no fresh orange left
         return freshOranges == 0 ? minutesElapsed : -1;
     }
-    //O(N^2m^2) S:o(1) WITHOUT USING queue we use the grid with iteration stamp by replace insted of 2 replace 3 in the first iteration (i+2)
+
+    // O(N^2m^2) S:o(1) WITHOUT USING queue we use the grid with iteration stamp by
+    // replace insted of 2 replace 3 in the first iteration (i+2)
     // run the rotting process, by marking the rotten oranges with the timestamp
     public boolean runRottingProcess(int timestamp, int[][] grid, int ROWS, int COLS) {
         int[][] directions = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
@@ -120,7 +174,7 @@ public class orangesRotting {
         return toBeContinued;
     }
 
-    public int orangesRotting(int[][] grid) {
+    public int orangesRotting2(int[][] grid) {
         int ROWS = grid.length, COLS = grid[0].length;
         int timestamp = 2;
         while (runRottingProcess(timestamp, grid, ROWS, COLS))
