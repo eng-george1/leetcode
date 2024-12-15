@@ -53,11 +53,11 @@ public class pacificAtlantic {
     }
 
     /*
-     * TC:O(n) SC: O(n)
      * #Notes
      * #LastReview
      * #Review
      * #Idea:
+     * TC:O(nXm) SC: O(nXm)
      */
     // DFS
     private static final int[][] DIRECTIONS = new int[][] { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };

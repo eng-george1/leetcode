@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class solution {
+public class topKFrequent {
     /*
      * https://leetcode.com/problems/top-k-frequent-elements/description/
      * 347. Top K Frequent Elements

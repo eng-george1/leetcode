@@ -44,7 +44,8 @@ public class lowestCommonAncestor {
      * #Notes
      * #LastReview
      * #Review
-     * #Idea:
+     * #Idea:we have three case one in different side, same side but different
+     * branch and same side in same branch(one is the parent)
      * TC:O(n) SC: O(h) where h the hight of the tree
      */
     // // in case of Balanced Binary tree ( Optimal solution going to be DFS) using
@@ -56,8 +57,10 @@ public class lowestCommonAncestor {
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
         if (left != null && right != null) {
+            //diff side or same with diff branch
             return root;
         }
+        //in same side and one is the parent
         return left != null ? left : right;
     }
 

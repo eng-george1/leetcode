@@ -23,6 +23,8 @@ public class calculate {
      */
     public static void main(String[] args) {
         System.out.println("Hello");
+        calculate c=new calculate();
+        c.calculate("3+22*2");
     }
 
     /*

@@ -41,11 +41,11 @@ public class LeastInterval {
     }
 
     /*
-     * TC:O(n) SC: O(n)
      * #Notes
      * #LastReview
      * #Review
      * #Idea: 
+     * TC:O(n) SC: O(n)
      */
     public static int leastInterval(char[] tasks, int n) {
         int[] freq = new int[26];
@@ -58,6 +58,7 @@ public class LeastInterval {
         int countMaxFreq = 0;
         for (int f : freq) {
             if (f == maxFreq)
+            // number item with max freq
                 countMaxFreq++;
         }
         return Math.max(tasks.length, (maxFreq - 1) * (n + 1) + countMaxFreq);

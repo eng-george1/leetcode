@@ -1,6 +1,6 @@
 package Array;
 
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class kSum {
     /*
@@ -16,6 +16,7 @@ public class kSum {
      * Note that the empty subsequence is considered to have a sum of 0.
      * Example 1:
      * Input: nums = [2,4,-2], k = 5
+     * -2,2,4
      * Output: 2
      * Explanation: All the possible subsequence sums that we can obtain are the
      * following sorted in decreasing order:
@@ -25,41 +26,59 @@ public class kSum {
      * Input: nums = [1,-2,3,4,-10,12], k = 16
      * Output: 10
      * Explanation: The 16-Sum of the array is 10.
+     * 139. Word Break
      * #PatchNo
      */
     public static void main(String[] args) {
         System.out.println("Hello");
-        System.out.println(kSum(new int[]{2,4,-2},5));
+        kSum solution = new kSum();
+        int[] nums = { 2, 3, 1 };
+        int k = 2;
+        long result = solution.kSum(nums, k);
+        System.out.println("K-Sum: " + result); // Output: 5
+
+        System.out.println(solution.kSum(new int[]{2,4,-2},5));
     }
 
     /*
-     * TC:O(n) SC: O(n)
      * #Notes
      * #LastReview
      * #Review
      * #Idea:
+     * TC:O(nlogn+klogk) SC: O(n+k)
      */
-    public static long kSum(int[] nums, int k) {
-        long sum = 0;
-        PriorityQueue<Integer> pqPositive = new PriorityQueue<>();
-        PriorityQueue<Integer> pqNegative = new PriorityQueue<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] >= 0) {
-                sum += nums[i];
-                pqPositive.add(nums[i]);
-            } else {
-                pqNegative.add(nums[i]);
+    public long kSum(int[] nums, int k) {
+        long maxSum = 0;
+        int n = nums.length;
+        // Calculate the max sum of all elements considering all are positive
+        for (int num : nums) {
+            if (num > 0) {
+                maxSum += num;
             }
         }
-        while ((!pqPositive.isEmpty()||!pqNegative.isEmpty())&&k>0) {
-            if(!pqPositive.isEmpty()){
-                sum-=pqPositive.poll();
-            }
-            else{
-                sum+=pqNegative.poll();
+        // Make all elements positive and sort the array
+        for (int i = 0; i < n; i++) {
+            nums[i] = Math.abs(nums[i]);
+        }
+        Arrays.sort(nums);
+        // PriorityQueue to keep track of largest sums (using a max heap)
+        PriorityQueue<long[]> pq = new PriorityQueue<>((a, b) -> Long.compare(b[0], a[0]));
+        pq.offer(new long[] { maxSum, 0 });
+        // Iterate to find the Kth largest sum
+        while (k > 1) {
+            long[] top = pq.poll();
+            long currentSum = top[0];
+            int index = (int) top[1];
+            if (index < n) {
+                pq.offer(new long[] { currentSum - nums[index], index + 1 });
+                if (index > 0) {
+                    // Add back the previous element to explore a different combination of the
+                    // subsequence
+                    pq.offer(new long[] { currentSum - nums[index] + nums[index - 1], index + 1 });
+                }
             }
             k--;
         }
-        return sum;
+        return pq.poll()[0];
     }
 }
