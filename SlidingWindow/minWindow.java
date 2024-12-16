@@ -65,11 +65,11 @@ public class minWindow {
     }
 
     /*
-     * TC:O(n) SC: O(n)
      * #Notes
      * #LastReview
      * #Review
      * #Idea:
+     * TC:O(n) SC: O(n)
      */
     public static String minWindow(String s, String t) {
         if (s == null || t == null) {
@@ -80,7 +80,6 @@ public class minWindow {
         int left = 0;
         int count = 0;
         int minLen = Integer.MAX_VALUE;
-
         for (char c : t.toCharArray()) {
             ++letterCount[c];
         }
@@ -88,7 +87,6 @@ public class minWindow {
             if (--letterCount[s.charAt(right)] >= 0) {
                 ++count;
             }
-
             while (count == t.length()) {
                 if (minLen > right - left + 1) {
                     minLen = right - left + 1;

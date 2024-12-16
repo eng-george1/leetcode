@@ -46,12 +46,12 @@ public class mergeKLists {
     }
 
     /*
-     * TC:O(Nlogk) where k is the number of linked lists. SC: O(n)
      * #Notes
      * #LastReview
      * #Review
      * #Idea: use min heap to get the first node for each list and get the top in
      * the heap and put the next of this item
+     * TC:O(Nlogk) where k is the number of linked lists. SC: O(n)
      */
     public static ListNode mergeKLists(ListNode[] lists) {
         PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);

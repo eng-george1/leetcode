@@ -91,11 +91,11 @@ public class findKthLargest {
   }
 
   /*
-   * TC:O(nlogn) SC: O(k)
    * #Notes
    * #LastReview
    * #Review
-   * #Idea: filling the heap with the first k elements
+   * #Idea: filling the heap with the first k elements and after that remove and add 
+   * TC:O(nlogn) SC: O(k)
    */
   public static int findKthLargest(int[] nums, int k) {
     PriorityQueue<Integer> minHeap = new PriorityQueue<>();
@@ -103,14 +103,12 @@ public class findKthLargest {
     for (int i = 0; i < k; i++) {
       minHeap.offer(nums[i]);
     }
-
     for (int i = k; i < nums.length; i++) {
       if (nums[i] > minHeap.peek()) {
         minHeap.poll();
         minHeap.offer(nums[i]);
       }
     }
-
     return minHeap.peek();
   }
 }

@@ -32,12 +32,12 @@ public class jumpGame {
     }
 
     /*
-     * TC:O(n) SC: O(1)
      * #Notes
      * #Review
      * #Idea: calculate the max reach and check that with the current index if less
      * means i can't reach to this index
      * calculate the max reach by index+num
+     * TC:O(n) SC: O(1)
      */
     public static boolean canJump(int[] nums) {
         int reachable = 0;
