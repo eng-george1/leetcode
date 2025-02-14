@@ -2,6 +2,7 @@
 public class longestPalindromicSubstring {
     /*
      * https://leetcode.com/problems/longest-palindromic-substring/description/
+     * 5. Longest Palindromic Substring
      * Given a string s, return the longest
      * palindromic
      * 
@@ -31,11 +32,13 @@ public class longestPalindromicSubstring {
     }
 
     /*
-     * TC:O(n^2) SC: O(1)
+     * 
      * #Notes substring (i,j+1), we can have two pointers and from middle and from
      * longest to smalles
      * #Review
+     * TC:O(n^2) SC: O(1)
      */
+
     private static int startIndex = 0;
     private static int endIndex = 0;
     public static String longestPalindrome(String s) {
@@ -50,6 +53,7 @@ public class longestPalindromicSubstring {
         }
         return s.substring(startIndex, endIndex + 1);
     }
+
     private static void expandAroundCenter(String s, int left, int right) {
         // Expand as long as the characters on both sides are equal
         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {

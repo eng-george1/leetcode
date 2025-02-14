@@ -129,6 +129,9 @@ public class decodeString {
 9) return the result
      */
     //https://leetcode.com/problems/decode-string/solutions/1635285/java-single-stack-iterative-approach-detailed-explanation/
+    // * #Idea: Nested and also start and end with string ab3[a2[c]abc] 
+    // * 3[a]2[bc]
+    // * 3[a2[c]abc]
     public static String decodeString1(String s) {
         Stack<Character> stack = new Stack<>();
         for(char ch : s.toCharArray()){

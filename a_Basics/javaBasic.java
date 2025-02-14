@@ -30,6 +30,8 @@ public class javaBasic {
         for (int[] a : result) {
             System.out.println(Arrays.toString(a));
         }
+        // convert to 2D array
+       int[][] result2= result.toArray(new int[result.size()][]);
         // print 2D array
         int[][] array = new int[][] { { 1, 1 }, { 2, 2 }, { 3, 3 } };
         System.out.println(Arrays.deepToString(array));
@@ -40,6 +42,7 @@ public class javaBasic {
         // Initialize List
         List<List<Integer>> array1 = new ArrayList<>();
         array1.add(Arrays.asList(1, 2, 3, 4));
+        int[][] array2 = array1.stream().map(l -> l.stream().mapToInt(Integer::intValue).toArray()).toArray(int[][]::new);
         // to print
         System.out.println(array1);
         // Define Stack
@@ -67,6 +70,7 @@ public class javaBasic {
         Deque<String> deque = new ArrayDeque<>();
 
         // Adding elements to both ends
+        //all methods in queue and stack are there with first and last except push and pop
         deque.addFirst("Element 1 (Front)"); // Adding to the front
         deque.addLast("Element 2 (End)"); // Adding to the end
         deque.getFirst();
@@ -91,15 +95,21 @@ public class javaBasic {
         // Ascending
         PriorityQueue<int[]> pqMin = new PriorityQueue<>((a, b) -> Integer.compare(a[1], b[1]));
 
-
-        int[][] array2D=new int[3][3];
-        int nr=array2D.length;
-        int nc=array2D[0].length;
-        // In a 2D array, you can convert any element located at item[r][c] to a 1D        
+        int[][] array2D = new int[3][3];
+        int nr = array2D.length;
+        int nc = array2D[0].length;
+        // In a 2D array, you can convert any element located at item[r][c] to a 1D
         // array index using the formula:
+        // Row-Major Order
         // index = r * nc + c
         // To convert it back from a 1D index to 2D coordinates:
-        // r = index / nc 
-        // c = index % nc 
+        // r = index / nc
+        // c = index % nc
+
+        // Column-Major Order
+        // index = c * nr + r
+        // To convert it back from a 1D index to 2D coordinates:
+        // r = index % nr
+        // c = index / nr
     }
 }
