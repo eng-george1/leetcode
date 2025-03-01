@@ -64,6 +64,7 @@ public class fourSum {
 
         for (int i = start; i < nums.length; ++i) {
             if (i == start || nums[i - 1] != nums[i]) {
+                //recursion with i+1 and k-1
                 for (List<Integer> subset : kSum(
                         nums,
                         target - nums[i],

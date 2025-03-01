@@ -2,6 +2,9 @@ package a_Basics.Tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
+
+import org.w3c.dom.Node;
 
 class BinarySearchTree {
     TreeNode root;
@@ -139,12 +142,29 @@ class BinarySearchTree {
         }
     }
 
-    // Utility method to print tree in-order
-    public void inorderTraversal(TreeNode root) {
+    // in-order left-->root-->right
+    public void inOrderTraversal(TreeNode root) {
         if (root != null) {
-            inorderTraversal(root.left);
+            inOrderTraversal(root.left);
             System.out.print(root.val + " ");
-            inorderTraversal(root.right);
+            inOrderTraversal(root.right);
+        }
+    }
+
+    public void inOrderTraversal01(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            // Reach the leftmost node of the current node
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            // Current must be NULL at this point, pop the top node
+            curr = stack.pop();
+            System.out.print(curr.val + " ");
+            // Move to the right subtree
+            curr = curr.right;
         }
     }
 
@@ -155,6 +175,79 @@ class BinarySearchTree {
         arr.add(root.val);
         inorder(root.right, arr);
         return arr;
+    }
+
+    // Preorder Traversal root-->left-->right
+    public void preOrderTraversal(TreeNode root) {
+        if (root != null) {
+            System.out.print(root.val + " ");
+            preOrderTraversal(root.left);
+            preOrderTraversal(root.right);
+        }
+    }
+
+    public void preOrderTraversal01(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            System.out.print(node.val + " ");
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+    }
+
+    // Postorder Traversal left-->right-->root
+    public void postOrderTraversal(TreeNode root) {
+        if (root != null) {
+            postOrderTraversal(root.left);
+            postOrderTraversal(root.right);
+            System.out.print(root.val + " ");
+        }
+    }
+    // one stack
+    public void postOrderTraversal01(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root, lastVisited = null;
+
+        while (curr != null || !stack.isEmpty()) {
+            if (curr != null) {
+                stack.push(curr);
+                curr = curr.left; // Move left
+            } else {
+                TreeNode peekNode = stack.peek();
+                if (peekNode.right != null && peekNode.right != lastVisited) {
+                    curr = peekNode.right; // Move right
+                } else {
+                    System.out.print(peekNode.val + " ");
+                    lastVisited = stack.pop();
+                }
+            }
+        }
+    }
+    // stack1 processes nodes in root → left → right order.
+    // stack2 stores nodes in left → right → root order.
+    public void postOrderTraversal02(TreeNode root) {
+        if (root == null)
+            return;
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack1.push(root);
+        while (!stack1.isEmpty()) {
+            TreeNode node = stack1.pop();
+            stack2.push(node);
+            if (node.right != null)
+                stack1.push(node.right);
+            if (node.left != null)
+                stack1.push(node.left);
+        }
+        while (!stack2.isEmpty()) {
+            System.out.print(stack2.pop().val + " ");
+        }
     }
 
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -178,7 +271,7 @@ class BinarySearchTree {
         TreeNode root1 = bst.buildBST(nums1);
         System.out.println("Inorder traversal (should be sorted):");
         root1.prettyPrint();
-        bst.inorderTraversal(root1);
+        bst.inOrderTraversal(root1);
 
         // Test 2: Balanced BST from sorted array
         System.out.println("\nBalanced BST from sorted array:");
@@ -186,7 +279,7 @@ class BinarySearchTree {
         TreeNode root2 = bst.buildBalancedBST(nums2);
         System.out.println("Inorder traversal:");
         root2.prettyPrint();
-        bst.inorderTraversal(root2);
+        bst.inOrderTraversal(root2);
 
     }
 }

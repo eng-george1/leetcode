@@ -76,7 +76,7 @@ public class LFUCache {
     // key: original key, value: frequency and original value.
     private Map<Integer, Pair<Integer, Integer>> cache;
     // key: frequency, value: All keys that have the same frequency.
-    private Map<Integer, LinkedHashSet<Integer>> frequencies;
+    private Map<Integer, LinkedHashSet<Integer>> frequencies; //like Set<Integer> but it maintain the order 
     private int minf;
     private int capacity;
 
@@ -120,12 +120,12 @@ public class LFUCache {
         Pair<Integer, Integer> frequencyAndValue = cache.get(key);
         if (frequencyAndValue != null) {
             cache.put(key, new Pair<>(frequencyAndValue.getKey(), value));
-            get(key);
+            get(key);// will increase freq+1
             return;
         }
         if (capacity == cache.size()) {
             final Set<Integer> keys = frequencies.get(minf);
-            final int keyToDelete = keys.iterator().next();
+            final int keyToDelete = keys.iterator().next();//get the first added to be removed
             cache.remove(keyToDelete);
             keys.remove(keyToDelete);
             if (keys.isEmpty()) {
